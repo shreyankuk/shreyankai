@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shreyank AI</title>
   <!-- Using modern font: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -79,6 +79,14 @@
       /* Force hero sections to a fixed height in mobile view */
       .hero { height: 60vh !important; }
       .hero video { height: 60vh !important; }
+      /* Further reduce font sizes & padding on mobile */
+      #hero h1 { font-size: 30px; }
+      #hero p { font-size: 16px; }
+      .medgpt-content h1 { font-size: 45px; }
+      h2 { font-size: 45px; }
+      p { font-size: 14px; }
+      section { padding: 40px 10px; }
+      nav ul li a { font-size: 16px; }
     }
     /* Hero Sections with Video Backgrounds */
     .hero {
@@ -136,12 +144,16 @@
       from, to { border-color: transparent; }
       50% { border-color: #0ff; }
     }
-    /* MedGPT Section: Remove typewriter, enlarge title */
+    /* MedGPT Section: Remove typewriter, enlarge title and reduce content */
     .medgpt-content h1 {
       font-size: 80px;
       margin-bottom: 20px;
       animation: none;
       border: none;
+    }
+    .medgpt-content p {
+      font-size: 20px;
+      line-height: 1.6;
     }
     /* Section Styling */
     section {
@@ -240,21 +252,12 @@
       font-size: 14px;
       color: #aaa;
     }
-    /* Responsive Adjustments for smaller screens */
-    @media (max-width: 768px) {
-      #hero h1 { font-size: 40px; }
-      #hero p { font-size: 20px; }
-      .medgpt-content h1 { font-size: 60px; }
-      h2 { font-size: 60px; }
-      p { font-size: 18px; }
-      section { padding: 70px 20px; }
-    }
   </style>
 </head>
 <body>
   <!-- Particle Background Canvas -->
   <canvas id="particle-canvas"></canvas>
-
+  
   <!-- Navigation Bar -->
   <header>
     <div class="logo">
@@ -270,7 +273,7 @@
       <div class="hamburger" onclick="toggleMenu()">☰</div>
     </nav>
   </header>
-
+  
   <!-- Hero Section: Welcome Video (shrey.mp4) with Typewriter Title and Tagline -->
   <section class="hero" id="hero">
     <video autoplay muted loop>
@@ -283,7 +286,7 @@
       <p>Empowering the Future of Innovation</p>
     </div>
   </section>
-
+  
   <!-- New Playable Video Section (shreyankai.mp4) Above "Maximize Productivity" -->
   <section id="intro-video" class="fade-in">
     <video controls>
@@ -291,14 +294,14 @@
       Your browser does not support the video tag.
     </video>
   </section>
-
+  
   <!-- Maximize Productivity Section (White Background) -->
   <section class="white-bg fade-in" id="productivity">
     <h2>Maximize Productivity.</h2>
     <p>Shreyank AI provides state-of-the-art tools designed to optimize your workflow, accelerate your projects, and empower you with intelligent automation. Experience seamless integration, powerful analytics, and next-generation productivity features that drive innovation and success.</p>
   </section>
-
-  <!-- MedGPT Section: Video Background (medgpt.mp4) with Expanded Info -->
+  
+  <!-- MedGPT Section: Video Background (medgpt.mp4) with Reduced Content -->
   <section class="hero fade-in" id="medgpt">
     <video autoplay muted loop>
       <source src="medgpt.mp4" type="video/mp4">
@@ -307,10 +310,10 @@
     <div class="overlay"></div>
     <div class="content medgpt-content">
       <h1>Introducing MedGPT</h1>
-      <p>MedGPT revolutionizes healthcare by providing real-time diagnostics, personalized treatment recommendations, and seamless integration with medical devices. Leveraging advanced AI and machine learning, MedGPT supports doctors in decision-making, reduces misdiagnosis, and enhances patient outcomes. It’s the future of healthcare—where technology meets empathy and precision to transform patient care.</p>
+      <p>An advanced AI model for healthcare assisting in diagnostics and treatment suggestions.</p>
     </div>
   </section>
-
+  
   <!-- Projects Section: Completed & Ongoing Projects (Text-only Cards) -->
   <section class="white-bg fade-in" id="projects">
     <!-- Completed Projects Heading (Underlined) -->
@@ -356,18 +359,18 @@
       </div>
     </div>
   </section>
-
-  <!-- Contact Section (Dark Background, without the "Contact" heading) -->
+  
+  <!-- Contact Section (Dark Background, without "Contact" heading) -->
   <section class="dark-bg fade-in" id="contact">
     <p>For inquiries, collaborations, or feedback, reach out at:</p>
     <p><a href="mailto:shreyankuk@gmail.com" style="color: #0ff; text-decoration: none;">shreyankuk@gmail.com</a></p>
   </section>
-
+  
   <!-- Footer -->
   <footer>
     © 2025 Shreyank AI. All Rights Reserved.
   </footer>
-
+  
   <!-- JavaScript for Hamburger Menu, Particle Background, & Fade-In Animation -->
   <script>
     // Hamburger Menu Toggle
