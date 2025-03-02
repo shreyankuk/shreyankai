@@ -2,388 +2,457 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shreyank AI</title>
+  <!-- Using modern font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset and Basic Styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Global & Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      transition: background 0.3s, color 0.3s;
+      font-family: 'Poppins', sans-serif;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
     }
-    html {
-      scroll-behavior: smooth;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    /* Header and Navigation */
-    header {
-      width: 100%;
+    /* Particle Background */
+    #particle-canvas {
       position: fixed;
       top: 0;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
+      left: 0;
+      z-index: -100;
+      width: 100%;
+      height: 100%;
+    }
+    /* Glassmorphism Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
     }
-    .logo {
-      font-size: 1.8rem;
+    header .logo {
+      font-size: 28px;
       font-weight: bold;
-      color: #333;
+      background: linear-gradient(45deg, #0ff, #f0f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .menu-toggle {
-      font-size: 2rem;
-      cursor: pointer;
-      display: block;
-      color: #333;
-    }
-    
-    /* Mobile Menu (Dropdown) */
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 70px;
-      right: 20px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-      z-index: 1001;
-    }
-    .mobile-menu.active {
-      display: block;
-    }
-    .mobile-menu ul {
-      list-style: none;
-    }
-    .mobile-menu ul li {
-      margin: 10px 0;
-    }
-    .mobile-menu ul li a {
-      color: #333;
-      font-weight: 500;
-    }
-    .mobile-menu ul li a:hover {
-      color: #007BFF;
-    }
-    
-    /* Section Styling & Advanced Animations */
-    section {
-      min-height: 100vh;
-      padding: 120px 20px 20px 20px;
+    nav ul {
       display: flex;
-      flex-direction: column;
+      list-style: none;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover { color: #0ff; }
+    /* Hamburger Menu for Mobile */
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 70px;
+        right: 40px;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      nav ul.show { display: flex; }
+      .hamburger { display: block; }
+      /* Force hero sections to a fixed height in mobile view */
+      .hero { height: 60vh !important; }
+      .hero video { height: 60vh !important; }
+    }
+    /* Hero Sections with Video Backgrounds */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+    }
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Increased brightness for shrey.mp4 */
+      filter: brightness(1.8);
+    }
+    .hero .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      padding: 0 20px;
+    }
+    /* Welcome Section: Typewriter effect remains; added tagline below */
+    #hero h1 {
+      font-size: 60px;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #0ff;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    #hero p {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #0ff; }
+    }
+    /* MedGPT Section: Remove typewriter, enlarge title */
+    .medgpt-content h1 {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: none;
+      border: none;
+    }
+    /* Section Styling */
+    section {
+      padding: 100px 50px;
+      position: relative;
+    }
+    /* Fade-in effect for non-hero sections */
+    .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.8s forwards;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    
-    /* Home Section */
-    #home {
+    .white-bg { background: #fff; color: #111; }
+    .dark-bg { background: #000; color: #fff; }
+    /* In white sections, titles should be black and larger */
+    .white-bg h2 {
+      font-size: 80px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #111;
+    }
+    /* Refined Project Headings (now underlined and smaller) */
+    .project-section h2 {
+      font-size: 60px;
+      margin-top: 50px;
+      text-align: center;
+      color: #111;
+      text-decoration: underline;
+    }
+    p {
+      font-size: 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+    /* Maximize Productivity Section */
+    #productivity {
+      background: #fff;
+      color: #111;
+      padding: 80px 50px;
+    }
+    /* New Playable Video Section Above "Maximize Productivity" */
+    #intro-video {
+      padding: 50px 50px;
+      text-align: center;
+      background: #111;
+    }
+    #intro-video video {
+      width: 90%;
+      max-width: 800px;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto;
+    }
+    /* Projects Section: Cards without images (text-only) with black background */
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .card {
       background: #000;
       color: #fff;
-      text-align: center;
-      padding-top: 80px; /* leave space for fixed header */
-    }
-    /* Video Container in Home Section */
-    .video-container {
-      width: 100%;
-      max-height: 80vh;
+      border: 1px solid #333;
+      border-radius: 15px;
       overflow: hidden;
-    }
-    .video-container video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    /* Prevent Video from Enlarging in Portrait Mode */
-    @media (orientation: portrait) {
-      .video-container video {
-        width: 100%;
-        height: auto;
-      }
-    }
-    /* Text Container in Home Section */
-    .home-text {
+      width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
       padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     }
-    #home h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0ff;
     }
-    #home p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.8;
+    .card .card-content h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
     }
-    
-    /* About Section */
-    #about {
-      background: #fff;
-      color: #333;
-      text-align: left;
-      padding: 40px 20px;
+    .card .card-content p {
+      font-size: 18px;
+      line-height: 1.5;
     }
-    #about .content {
-      max-width: 800px;
-      margin: auto;
-    }
-    #about h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    #about p {
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.8;
-    }
-    
-    /* Projects Section */
-    #projects {
-      background: #f9f9f9;
-      color: #333;
-      padding: 40px 20px;
-    }
-    #projects .content {
-      max-width: 1000px;
-      margin: auto;
-    }
-    #projects h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    .project-category {
-      margin-bottom: 2rem;
-    }
-    .project-category h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #007BFF;
-      display: inline-block;
-      padding-bottom: 0.2rem;
-    }
-    .project-item {
-      background: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 1rem;
-    }
-    .project-item h4 {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
-    }
-    .project-item a {
-      color: #007BFF;
-      font-weight: bold;
-    }
-    
-    /* Contact Section */
-    #contact {
-      background: #f4f4f4;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    #contact h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
-    #contact p {
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
-    }
-    #contact a {
-      color: #007BFF;
-      font-weight: bold;
-    }
-    
     /* Footer */
     footer {
-      background: #333;
-      color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 1rem;
-      width: 100%;
+      background: #111;
+      font-size: 14px;
+      color: #aaa;
     }
-    
-    /* Button Style */
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-    
-    /* Responsive Adjustments */
+    /* Responsive Adjustments for smaller screens */
     @media (max-width: 768px) {
-      .menu-toggle {
-        font-size: 2rem;
-      }
-      #home h1 {
-        font-size: 2.8rem;
-      }
-      #about h2, #projects h2, #contact h2 {
-        font-size: 2.4rem;
-      }
+      #hero h1 { font-size: 40px; }
+      #hero p { font-size: 20px; }
+      .medgpt-content h1 { font-size: 60px; }
+      h2 { font-size: 60px; }
+      p { font-size: 18px; }
+      section { padding: 70px 20px; }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+  <!-- Particle Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navigation Bar -->
   <header>
-    <div class="logo">Shreyank AI</div>
-    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <div class="logo">
+      <a href="#" style="text-decoration: none; color: inherit;">Shreyank AI</a>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#medgpt">MedGPT</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </nav>
   </header>
-  <div class="mobile-menu" id="mobile-menu">
-    <ul>
-      <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-      <li><a href="#about" onclick="toggleMenu()">About</a></li>
-      <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-    </ul>
-  </div>
-  
-  <!-- Home Section with Video Above Text -->
-  <section id="home">
-    <div class="video-container">
-      <video autoplay playsinline controls id="bg-video">
-        <source src="shreyankai.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <div class="home-text">
-      <h1>Shreyank AI</h1>
-      <p>
-        Welcome to Shreyank AI – where technology meets innovation. We develop cutting-edge applications ranging from AI-powered chatbots and predictive analytics to intelligent automation systems. Our solutions are designed to transform industries and drive forward the future of technology.
-      </p>
+
+  <!-- Hero Section: Welcome Video (shrey.mp4) with Typewriter Title and Tagline -->
+  <section class="hero" id="hero">
+    <video autoplay muted loop>
+      <source src="shrey1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Welcome to Shreyank AI</h1>
+      <p>Empowering the Future of Innovation</p>
     </div>
   </section>
-  
-  <!-- About Section -->
-  <section id="about">
-    <div class="content">
-      <h2>About Shreyank AI</h2>
-      <p>
-        At Shreyank AI, our expertise spans both software development and the medical field. We pride ourselves on crafting advanced software solutions that leverage the latest in artificial intelligence and machine learning.
-      </p>
-      <p>
-        With a strong background in medical technology, our work is driven by a passion for integrating innovative software with healthcare advancements. This unique blend allows us to create applications that not only excel technically but also contribute to improving healthcare outcomes.
-      </p>
+
+  <!-- New Playable Video Section (shreyankai.mp4) Above "Maximize Productivity" -->
+  <section id="intro-video" class="fade-in">
+    <video controls>
+      <source src="shreyankai.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <!-- Maximize Productivity Section (White Background) -->
+  <section class="white-bg fade-in" id="productivity">
+    <h2>Maximize Productivity.</h2>
+    <p>Shreyank AI provides state-of-the-art tools designed to optimize your workflow, accelerate your projects, and empower you with intelligent automation. Experience seamless integration, powerful analytics, and next-generation productivity features that drive innovation and success.</p>
+  </section>
+
+  <!-- MedGPT Section: Video Background (medgpt.mp4) with Expanded Info -->
+  <section class="hero fade-in" id="medgpt">
+    <video autoplay muted loop>
+      <source src="medgpt.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="content medgpt-content">
+      <h1>Introducing MedGPT</h1>
+      <p>MedGPT revolutionizes healthcare by providing real-time diagnostics, personalized treatment recommendations, and seamless integration with medical devices. Leveraging advanced AI and machine learning, MedGPT supports doctors in decision-making, reduces misdiagnosis, and enhances patient outcomes. It’s the future of healthcare—where technology meets empathy and precision to transform patient care.</p>
     </div>
   </section>
-  
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="content">
-      <h2>Projects</h2>
-      <!-- Completed Projects -->
-      <div class="project-category">
-        <h3>Completed Projects</h3>
-        <div class="project-item">
-          <h4>Shreyank AI Chatbot</h4>
-          <p>
-            A robust AI-powered chatbot designed to provide intelligent conversation and support. This project demonstrates our ability to create interactive, efficient, and smart communication solutions.
-          </p>
-          <p>
-            Visit: <a href="https://shreyankchatbot.onrender.com" target="_blank">shreyankchatbot.onrender.com</a>
-          </p>
-        </div>
-        <div class="project-item">
-          <h4>Shreyank AI Quiz</h4>
-          <p>
-            An innovative quiz platform that leverages artificial intelligence to deliver dynamic multiple-choice questions for an interactive learning experience. Designed for smart evaluation and personalized feedback.
-          </p>
-          <p>
-            Visit: <a href="https://shreyankuk.pythonanywhere.com" target="_blank">shreyankuk.pythonanywhere.com</a>
-          </p>
+
+  <!-- Projects Section: Completed & Ongoing Projects (Text-only Cards) -->
+  <section class="white-bg fade-in" id="projects">
+    <!-- Completed Projects Heading (Underlined) -->
+    <div class="project-section">
+      <h2 style="font-size:60px; text-decoration: underline;">Completed Projects</h2>
+    </div>
+    <div class="projects-container">
+      <div class="card">
+        <div class="card-content">
+          <h3>Shreyank AI Chatbot</h3>
+          <p>An intelligent, AI-powered chatbot delivering dynamic, real-time conversations and assistance to users across various domains.</p>
         </div>
       </div>
-      <!-- Ongoing Projects -->
-      <div class="project-category">
-        <h3>Ongoing Projects</h3>
-        <div class="project-item">
-          <h4>Shreyank AI Image Text</h4>
-          <p>
-            A cutting-edge tool that utilizes AI to transform images into descriptive text, opening up new avenues in accessibility, content creation, and digital media innovation.
-          </p>
-        </div>
-        <div class="project-item">
-          <h4>Shreyank AI Interview</h4>
-          <p>
-            A state-of-the-art interview simulation platform powered by AI, crafted to help users prepare for real-world interviews through interactive, realistic practice sessions.
-          </p>
+      <div class="card">
+        <div class="card-content">
+          <h3>Shreyank AI Quiz</h3>
+          <p>An interactive quiz platform powered by AI, designed to assess knowledge, adapt to user responses, and challenge your intellect.</p>
         </div>
       </div>
     </div>
+    <!-- Ongoing Projects Heading (Underlined) -->
+    <div class="project-section">
+      <h2 style="font-size:60px; text-decoration: underline;">Ongoing Projects</h2>
+    </div>
+    <div class="projects-container">
+      <div class="card">
+        <div class="card-content">
+          <h3>Shreyank AI Interview</h3>
+          <p>An AI-driven simulated interview system that helps users prepare for real-life job or medical interviews with dynamic feedback.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Shreyank AI Music</h3>
+          <p>A revolutionary project where AI composes and recommends personalized music, creating unique soundtracks for every mood.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Shreyank AI Image Text</h3>
+          <p>An advanced AI tool that converts images to text and vice versa, using state-of-the-art OCR and creative algorithms.</p>
+        </div>
+      </div>
+    </div>
   </section>
-  
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>
-      For inquiries, collaborations, or additional information, please reach out to us at:
-    </p>
-    <p>
-      Email: <a href="mailto:shreyankuk@gmail.com">shreyankuk@gmail.com</a>
-    </p>
+
+  <!-- Contact Section (Dark Background, without the "Contact" heading) -->
+  <section class="dark-bg fade-in" id="contact">
+    <p>For inquiries, collaborations, or feedback, reach out at:</p>
+    <p><a href="mailto:shreyankuk@gmail.com" style="color: #0ff; text-decoration: none;">shreyankuk@gmail.com</a></p>
   </section>
-  
+
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Shreyank AI. All rights reserved.</p>
+    © 2025 Shreyank AI. All Rights Reserved.
   </footer>
-  
+
+  <!-- JavaScript for Hamburger Menu, Particle Background, & Fade-In Animation -->
   <script>
-    // Toggle Mobile Menu Visibility
+    // Hamburger Menu Toggle
     function toggleMenu() {
-      var menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('active');
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('show');
     }
-    document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
     
-    // Optional: Intersection Observer for Section Animations on Scroll
-    const sections = document.querySelectorAll('section');
-    const options = { threshold: 0.2 };
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          observer.unobserve(entry.target);
-        }
+    // Particle Background Code
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let particles = [];
+    const colors = ['#0ff', '#f0f', '#fff'];
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    function initParticles() {
+      particles = [];
+      const count = 150;
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
       });
-    }, options);
-    sections.forEach(section => {
-      observer.observe(section);
+      requestAnimationFrame(animateParticles);
+    }
+    
+    initParticles();
+    animateParticles();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+    
+    // Fade-in Animation using IntersectionObserver
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        appearOnScroll.unobserve(entry.target);
+      });
+    }, appearOptions);
+    
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
     });
   </script>
 </body>
