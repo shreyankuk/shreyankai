@@ -79,14 +79,15 @@
       /* Force hero sections to a fixed height in mobile view */
       .hero { height: 60vh !important; }
       .hero video { height: 60vh !important; }
-      /* Further reduce font sizes & padding on mobile */
-      #hero h1 { font-size: 30px; }
-      #hero p { font-size: 16px; }
-      .medgpt-content h1 { font-size: 45px; }
-      h2 { font-size: 45px; }
-      p { font-size: 14px; }
-      section { padding: 40px 10px; }
+      /* Decrease all font sizes in mobile view */
+      header .logo { font-size: 22px; }
       nav ul li a { font-size: 16px; }
+      #hero h1 { font-size: 25px; }
+      #hero p { font-size: 16px; }
+      .medgpt-content h1 { font-size: 50px; }
+      h2 { font-size: 40px; }
+      p { font-size: 14px; }
+      section { padding: 50px 15px; }
     }
     /* Hero Sections with Video Backgrounds */
     .hero {
@@ -105,7 +106,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* Increased brightness for shrey.mp4 */
+      /* Increased brightness for hero video */
       filter: brightness(1.8);
     }
     .hero .overlay {
@@ -124,13 +125,18 @@
       padding: 0 20px;
     }
     /* Welcome Section: Typewriter effect remains; added tagline below */
+    /* Insert a conditional break for mobile view */
     #hero h1 {
-      font-size: 60px;
+      font-size: 40px;
       margin-bottom: 10px;
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid #0ff;
       animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    .mobile-break { display: none; }
+    @media (max-width: 768px) {
+      .mobile-break { display: inline; }
     }
     #hero p {
       font-size: 24px;
@@ -146,7 +152,7 @@
     }
     /* MedGPT Section: Remove typewriter, enlarge title and reduce content */
     .medgpt-content h1 {
-      font-size: 80px;
+      font-size: 60px;
       margin-bottom: 20px;
       animation: none;
       border: none;
@@ -174,14 +180,14 @@
     .dark-bg { background: #000; color: #fff; }
     /* In white sections, titles should be black and larger */
     .white-bg h2 {
-      font-size: 80px;
+      font-size: 60px;
       margin-bottom: 30px;
       text-align: center;
       color: #111;
     }
-    /* Refined Project Headings (now underlined and smaller) */
+    /* Refined Project Headings (underlined and smaller) */
     .project-section h2 {
-      font-size: 60px;
+      font-size: 40px;
       margin-top: 50px;
       text-align: center;
       color: #111;
@@ -237,7 +243,7 @@
       box-shadow: 0 0 20px #0ff;
     }
     .card .card-content h3 {
-      font-size: 24px;
+      font-size: 20px;
       margin-bottom: 10px;
     }
     .card .card-content p {
@@ -274,7 +280,7 @@
     </nav>
   </header>
   
-  <!-- Hero Section: Welcome Video (shrey.mp4) with Typewriter Title and Tagline -->
+  <!-- Hero Section: Welcome Video (shrey1.mp4) with Typewriter Title and Tagline -->
   <section class="hero" id="hero">
     <video autoplay muted loop>
       <source src="shrey1.mp4" type="video/mp4">
@@ -282,8 +288,8 @@
     </video>
     <div class="overlay"></div>
     <div class="content">
-      <h1>Welcome to Shreyank AI</h1>
-      <p>Empowering the Future of Innovation</p>
+      <h1>Welcome to<span class="mobile-break"><br></span> Shreyank AI</h1>
+      <p>Empowering the Future...</p>
     </div>
   </section>
   
@@ -310,7 +316,7 @@
     <div class="overlay"></div>
     <div class="content medgpt-content">
       <h1>Introducing MedGPT</h1>
-      <p>An advanced AI model for healthcare assisting in diagnostics and treatment suggestions.</p>
+      <p>An advanced AI model for healthcare assisting in diagnostics and treatment suggestions. It has the capacity to give accurate medical queries to facilitate health professionals.</p>
     </div>
   </section>
   
@@ -318,7 +324,7 @@
   <section class="white-bg fade-in" id="projects">
     <!-- Completed Projects Heading (Underlined) -->
     <div class="project-section">
-      <h2 style="font-size:60px; text-decoration: underline;">Completed Projects</h2>
+      <h2 style="font-size:40px; text-decoration: underline;">Completed Projects</h2>
     </div>
     <div class="projects-container">
       <div class="card">
@@ -336,7 +342,7 @@
     </div>
     <!-- Ongoing Projects Heading (Underlined) -->
     <div class="project-section">
-      <h2 style="font-size:60px; text-decoration: underline;">Ongoing Projects</h2>
+      <h2 style="font-size:40px; text-decoration: underline;">Ongoing Projects</h2>
     </div>
     <div class="projects-container">
       <div class="card">
